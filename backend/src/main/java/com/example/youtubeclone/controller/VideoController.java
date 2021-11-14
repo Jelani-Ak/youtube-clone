@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping(path = "/api/videos")
+@RequestMapping(path = "/api/videos/")
 @RequiredArgsConstructor
 public class VideoController {
 
