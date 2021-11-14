@@ -23,13 +23,12 @@ public class S3Service implements FileService {
 
     @Override
     public String uploadFile(MultipartFile file) {
-        //Upload file to AWS S3
 
         //Prepare a Key
         var filenameExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
 
         //Create a unique value
-        var key = UUID.randomUUID().toString() + filenameExtension;
+        var key = UUID.randomUUID().toString() + "." + filenameExtension;
 
         //Create object metadata
         var metadata = new ObjectMetadata();
@@ -43,7 +42,7 @@ public class S3Service implements FileService {
                     "An exception occurred while uploading the file.");
         }
 
-        //Read this file publicly without any authentication
+        //Read this file publicly without any authentication from the angular application
         awsS3Client.setObjectAcl(BUCKET_NAME, key, CannedAccessControlList.PublicRead);
 
         return awsS3Client.getResourceUrl(BUCKET_NAME, key);
