@@ -1,4 +1,4 @@
-package com.example.youtubeclone.file;
+package com.example.youtubeclone.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

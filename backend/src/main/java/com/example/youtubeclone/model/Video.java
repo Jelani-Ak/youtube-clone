@@ -1,6 +1,5 @@
-package com.example.youtubeclone.video;
+package com.example.youtubeclone.model;
 
-import com.example.youtubeclone.comment.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

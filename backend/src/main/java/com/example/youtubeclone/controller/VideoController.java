@@ -1,5 +1,6 @@
-package com.example.youtubeclone.video;
+package com.example.youtubeclone.controller;
 
+import com.example.youtubeclone.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

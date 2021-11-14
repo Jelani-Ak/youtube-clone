@@ -1,6 +1,7 @@
-package com.example.youtubeclone.video;
+package com.example.youtubeclone.service;
 
-import com.example.youtubeclone.aws.S3Service;
+import com.example.youtubeclone.model.Video;
+import com.example.youtubeclone.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

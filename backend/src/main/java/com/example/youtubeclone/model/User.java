@@ -1,4 +1,4 @@
-package com.example.youtubeclone.user;
+package com.example.youtubeclone.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
