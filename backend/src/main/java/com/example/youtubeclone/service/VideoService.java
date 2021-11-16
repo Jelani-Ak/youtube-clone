@@ -1,5 +1,6 @@
 package com.example.youtubeclone.service;
 
+import com.example.youtubeclone.dto.UploadVideoResponse;
 import com.example.youtubeclone.dto.VideoDto;
 import com.example.youtubeclone.model.Video;
 import com.example.youtubeclone.repository.VideoRepository;
@@ -14,12 +15,14 @@ public class VideoService {
     private final S3Service s3Service;
     private final VideoRepository videoRepository;
 
-    public void uploadVideo(MultipartFile multipartFile) {
+    public UploadVideoResponse uploadVideo(MultipartFile multipartFile) {
         String videoUrl = s3Service.uploadFile(multipartFile);
         var video = new Video();
         video.setVideoUrl(videoUrl);
 
-        videoRepository.save(video);
+        var savedVideo = videoRepository.save(video);
+
+        return new UploadVideoResponse(savedVideo.getId(), savedVideo.getVideoUrl());
     }
 
     public VideoDto editVideo(VideoDto videoDto) {
