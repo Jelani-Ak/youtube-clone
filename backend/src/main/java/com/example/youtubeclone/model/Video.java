@@ -16,7 +16,7 @@ import java.util.Set;
 public class Video {
 
     @Id
-    private String Id;
+    private String id;
     private String title;
     private String description;
     private String userID;

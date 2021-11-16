@@ -49,8 +49,7 @@ public class VideoService {
         return thumbnailUrl;
     }
 
-
-    Video getVideoByID(String videoId) {
+    public Video getVideoByID(String videoId) {
         return videoRepository.findById(videoId)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find video by id: " + videoId));
     }
