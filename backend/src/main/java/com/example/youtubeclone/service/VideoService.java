@@ -1,5 +1,6 @@
 package com.example.youtubeclone.service;
 
+import com.example.youtubeclone.dto.VideoDto;
 import com.example.youtubeclone.model.Video;
 import com.example.youtubeclone.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,36 @@ public class VideoService {
         video.setVideoUrl(videoUrl);
 
         videoRepository.save(video);
+    }
+
+    public VideoDto editVideo(VideoDto videoDto) {
+        var savedVideo = getVideoByID(videoDto.getId());
+
+        savedVideo.setTitle(videoDto.getTitle());
+        savedVideo.setDescription(videoDto.getDescription());
+        savedVideo.setTags(videoDto.getTags());
+        savedVideo.setThumbnailUrl(videoDto.getThumbnailUrl());
+        savedVideo.setVideoStatus(videoDto.getVideoStatus());
+
+        videoRepository.save(savedVideo);
+        return videoDto;
+    }
+
+    public String uploadThumbnail(MultipartFile file, String videoId) {
+        var savedVideo = getVideoByID(videoId);
+
+        String thumbnailUrl = s3Service.uploadFile(file);
+
+        savedVideo.setThumbnailUrl(thumbnailUrl);
+
+        videoRepository.save(savedVideo);
+        return thumbnailUrl;
+    }
+
+
+    Video getVideoByID(String videoId) {
+        return videoRepository.findById(videoId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find video by id: " + videoId));
     }
 }
 
