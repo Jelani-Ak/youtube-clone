@@ -1,23 +1,11 @@
 <div fxLayout="row wrap">
-  <div class="hi-header-one" fxFlex="20%">
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <span>Hi One</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </div>
+  <div fxFlex="20%">Hi</div>
 
-  <div class="add-video-metadata-header" fxFlex="30%">
-    <!-- Video Metadata Header -->
-    <mat-toolbar color="secondary">
-      <mat-toolbar-row>
-        <span>Video Metadata</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-
-    <br/>
+  <div fxFlex="30%">
+    <div class="mat-title">Add Video Metadata</div>
 
     <form [formGroup]="saveVideoDetailsForm">
+
       <!-- Title -->
       <mat-form-field appearance="fill">
         <mat-label>Video Title</mat-label>
@@ -44,26 +32,26 @@
         </mat-select>
       </mat-form-field>
 
+      <br/>
+
       <!-- Tags -->
-      <div>
-        <mat-form-field class="example-chip-list" appearance="fill">
-          <mat-label>Tags</mat-label>
-          <mat-chip-list #chipList aria-label="Fruit selection">
-            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
-                      (removed)="remove(tag)">
-              {{tag}}
-              <button matChipRemove *ngIf="removable">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input placeholder="Add Tag..."
-                   [matChipInputFor]="chipList"
-                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                   [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="add($event)">
-          </mat-chip-list>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(tag)">
+            {{tag}}
+            <button matChipRemove *ngIf="removable">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input placeholder="Add Tag..."
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
 
       <div>
         <button type="submit" mat-raised-button color="primary">Save Details</button>
@@ -72,27 +60,9 @@
 
   </div>
 
-  <div class="video-player-header" fxFlex="30%">
-    <!-- Add Video Metadata Header -->
-    <mat-toolbar color="secondary">
-      <mat-toolbar-row>
-        <span>Video Player</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-
-    <app-video-player *ngIf="videoUrlAvailable" [videoUrl]="videoUrl"></app-video-player>
-    <div *ngIf="showVideoUrl">
-      <h1>You can now view the video at - </h1>
-      <a href="">http://localhost:4200/video/{{videoId}}</a>
-    </div>
+  <div fxFlex="30%">
+    Video player
   </div>
 
-  <div class="hi-header-two" fxFlex="20%">
-    <!-- Add Video Metadata Header -->
-    <mat-toolbar color="secondary">
-      <mat-toolbar-row>
-        <span>Hi Two</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </div>
+  <div fxFlex="20%">Hi</div>
 </div>
