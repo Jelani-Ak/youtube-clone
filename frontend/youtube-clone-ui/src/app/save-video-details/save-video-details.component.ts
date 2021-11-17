@@ -2,6 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from "@angular/material/chips";
+import {VideoService} from "../video.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute} from "@angular/router";
+import {BehaviorSubject, Subscription} from "rxjs";
+import {VideoDto} from "../VideoDto";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-save-video-details',
@@ -21,7 +27,25 @@ export class SaveVideoDetailsComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: string[] = [];
 
-  constructor() {
+  showVideoUrl = false;
+  videoUrlAvailable = false;
+  videoUrl!: string;
+  thumbnailUrl!: string;
+  videoId!: string;
+  selectedFile!: File;
+  selectedFileName = '';
+  uploadThumbnailSubscription!: Subscription;
+  fileUploaded!: boolean;
+  thumbnailUploaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(private videoService: VideoService, private matSnackBar: MatSnackBar,
+              private route: ActivatedRoute, private authService: AuthService) {
+    this.videoId = this.route.snapshot.params['videoId'];
+    this.videoService.getVideo(this.videoId).subscribe(data => {
+      this.videoUrl = data.url;
+      this.thumbnailUrl = data.thumbnailUrl;
+      this.videoUrlAvailable = true;
+    })
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
       description: this.description,
@@ -50,6 +74,38 @@ export class SaveVideoDetailsComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.selectedFileName = this.selectedFile.name;
+  }
 
+  onUpload() {
+    this.uploadThumbnailSubscription = this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
+      .subscribe(data => {
+        this.thumbnailUploaded.subscribe(() => {
+          this.matSnackBar.open("Thumbnail Uploaded Successfully", "OK");
+          this.fileUploaded = true;
+        });
+      });
+  }
 
+  saveVideo() {
+    const userId = this.authService.getUserId();
+    const videoMetaData: VideoDto = {
+      "videoId": this.videoId,
+      "userId": userId !== null ? userId : 'Test', //FIXME: check why userId is blank
+      "videoName": this.saveVideoDetailsForm.get('title')?.value,
+      "description": this.saveVideoDetailsForm.get('description')?.value,
+      "tags": this.tags,
+      "videoStatus": this.saveVideoDetailsForm.get('videoStatus')?.value,
+      "url": this.videoUrl,
+      "thumbnailUrl": this.thumbnailUrl,
+      "likeCount": 0,
+      "dislikeCount": 0
+    }
+    this.videoService.saveVideo(videoMetaData).subscribe(data => {
+      this.showVideoUrl = true;
+      this.matSnackBar.open("Video Metadata Updated Successfully", "OK");
+    });
+  }
 }
