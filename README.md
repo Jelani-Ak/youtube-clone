@@ -1,2 +1,2 @@
 # youtube-clone
- A Full-Stack Application that replicates YouTube functionality. Written using Java, HTML/CSS and Javascript along with Spring Boot and Angular frameworks
+ A Full-Stack Application that replicates basic YouTube functionality. Written in Java, HTML/CSS and JavaScript/TypeScript along with Spring Boot and Angular frameworks following a guided tutorial.
