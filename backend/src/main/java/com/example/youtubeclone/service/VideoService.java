@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class VideoService {
@@ -52,6 +54,10 @@ public class VideoService {
     public Video getVideoByID(String videoId) {
         return videoRepository.findById(videoId)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find video by id: " + videoId));
+    }
+
+    public List<Video> getAllVideos() {
+        return videoRepository.findAll();
     }
 }
 

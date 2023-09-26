@@ -2,11 +2,14 @@ package com.example.youtubeclone.controller;
 
 import com.example.youtubeclone.dto.UploadVideoResponse;
 import com.example.youtubeclone.dto.VideoDto;
+import com.example.youtubeclone.model.Video;
 import com.example.youtubeclone.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/videos")
@@ -31,5 +34,11 @@ public class VideoController {
     @ResponseStatus(HttpStatus.OK)
     public VideoDto editVideoMetadata(@RequestBody VideoDto videoDto) {
         return videoService.editVideo(videoDto);
+    }
+
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Video> getAllVideos() {
+        return videoService.getAllVideos();
     }
 }

@@ -5,22 +5,21 @@
     <div class="mat-title">Add Video Metadata</div>
 
     <form [formGroup]="saveVideoDetailsForm">
-
       <!-- Title -->
       <mat-form-field appearance="fill">
         <mat-label>Video Title</mat-label>
-        <input matInput [formControl]="title" required>
+        <input matInput [formControl]="title" required />
       </mat-form-field>
 
-      <br/>
+      <br />
 
       <!-- Description -->
       <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
-        <input matInput [formControl]="description" required>
+        <input matInput [formControl]="description" required />
       </mat-form-field>
 
-      <br/>
+      <br />
 
       <!-- Listing -->
       <mat-form-field appearance="fill">
@@ -32,37 +31,42 @@
         </mat-select>
       </mat-form-field>
 
-      <br/>
+      <br />
 
       <!-- Tags -->
       <mat-form-field class="example-chip-list" appearance="fill">
         <mat-label>Tags</mat-label>
         <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
-                    [removable]="removable" (removed)="remove(tag)">
-            {{tag}}
+          <mat-chip
+            *ngFor="let tag of tags"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(tag)"
+          >
+            {{ tag }}
             <button matChipRemove *ngIf="removable">
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip>
-          <input placeholder="Add Tag..."
-                 [matChipInputFor]="chipList"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="add($event)">
+          <input
+            placeholder="Add Tag..."
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
         </mat-chip-list>
       </mat-form-field>
 
       <div>
-        <button type="submit" mat-raised-button color="primary">Save Details</button>
+        <button type="submit" mat-raised-button color="primary">
+          Save Details
+        </button>
       </div>
     </form>
-
   </div>
 
-  <div fxFlex="30%">
-    Video player
-  </div>
+  <div fxFlex="30%">Video player</div>
 
   <div fxFlex="20%">Hi</div>
 </div>

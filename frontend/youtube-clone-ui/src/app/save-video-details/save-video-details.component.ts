@@ -49,7 +49,4 @@ export class SaveVideoDetailsComponent implements OnInit {
       this.tags.splice(index, 1);
     }
   }
-
-
-
 }

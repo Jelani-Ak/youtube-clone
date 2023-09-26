@@ -1,5 +1,8 @@
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -8,7 +11,7 @@ target/
 .project
 .settings
 .springBeans
-.sts4-cache/
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -17,8 +20,21 @@ target/
 *.ipr
 
 ### NetBeans ###
-nbproject/private/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+.sts4-cache/
+
+### NetBeans ###
+nbproject/private/
 nbbuild/
 dist/
 nbdist/
@@ -37,8 +53,6 @@ node/
 
 # IDEs and editors
 /.idea
-.project
-.classpath
 .c9/
 *.launch
 .settings/
@@ -66,4 +80,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-/Need for Speed  Carbon 2021.10.21 - 19.44.06.05.DVR.mp4
